@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 import json 
 import pandas as pd 
 import re
+import glob
 
 def get_standing(url):
   options = Options() 
@@ -51,13 +52,25 @@ def get_standing(url):
   json_data=df.to_json(orient='records')
 
   final_json = {
-    "season": "2023-2024", 
-    "league": "Ehiopian Preimer League",
+    "season": year, 
+    "league": League,
     "standings": json.loads(json_data)
   }
 
-  with open('standings.json', 'w') as f:
+  with open(League+'_'+year+'_'+'standings.json', 'w') as f:
       json.dump(final_json, f)
 
 
-# wtth open("")
+# Get a list of all text files that have '_archive_list.txt' in their names
+files = glob.glob('England_Premier-league_archive_list.txt')
+file="'England_archive_list.txt"
+
+with open(file, 'r') as f:
+    # Now you can read the file
+    
+    lines = f.readlines()
+    #print ("Checking "+lines)
+    get_standing(lines)
+    print("-------------------------------------------------")
+
+#get_standing("https://www.flashscore.com/football/ethiopia/premier-league-2022-2023/")
