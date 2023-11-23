@@ -44,8 +44,6 @@ df = pd.DataFrame(data)
 # Fix headers
 df.columns = ["Rank","Team", "MP", "Wins", "Draws", "Losses", "Goals","GD", "Points"]  
 
-# Reorder columns
-#df = df[["Team", "MP", "Wins", "Draws", "Losses", "Goals", "GD", "Points"]]
 
 json_data=df.to_json(orient='records')
 
