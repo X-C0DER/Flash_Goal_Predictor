@@ -1,0 +1,182 @@
+{
+    "season": "2023-2024",
+    "league": "Ehiopian Preimer League",
+    "standings": [
+        {
+            "Rank": "1.",
+            "Team": "St. George",
+            "MP": "30",
+            "Wins": "18",
+            "Draws": "10",
+            "Losses": "2",
+            "Goals": "54:21",
+            "GD": "33",
+            "Points": "64"
+        },
+        {
+            "Rank": "2.",
+            "Team": "Bahir Dar Kenema",
+            "MP": "30",
+            "Wins": "17",
+            "Draws": "9",
+            "Losses": "4",
+            "Goals": "51:30",
+            "GD": "21",
+            "Points": "60"
+        },
+        {
+            "Rank": "3.",
+            "Team": "Ethiopian Insurance",
+            "MP": "30",
+            "Wins": "14",
+            "Draws": "7",
+            "Losses": "9",
+            "Goals": "50:42",
+            "GD": "8",
+            "Points": "49"
+        },
+        {
+            "Rank": "4.",
+            "Team": "Ethiopia Bunna",
+            "MP": "30",
+            "Wins": "10",
+            "Draws": "13",
+            "Losses": "7",
+            "Goals": "38:32",
+            "GD": "6",
+            "Points": "43"
+        },
+        {
+            "Rank": "5.",
+            "Team": "Fasil Kenema",
+            "MP": "30",
+            "Wins": "11",
+            "Draws": "10",
+            "Losses": "9",
+            "Goals": "29:24",
+            "GD": "5",
+            "Points": "43"
+        },
+        {
+            "Rank": "6.",
+            "Team": "Hadiya Hossana",
+            "MP": "30",
+            "Wins": "11",
+            "Draws": "10",
+            "Losses": "9",
+            "Goals": "29:24",
+            "GD": "5",
+            "Points": "43"
+        },
+        {
+            "Rank": "7.",
+            "Team": "Hawassa",
+            "MP": "30",
+            "Wins": "10",
+            "Draws": "12",
+            "Losses": "8",
+            "Goals": "34:32",
+            "GD": "2",
+            "Points": "42"
+        },
+        {
+            "Rank": "8.",
+            "Team": "Adama City",
+            "MP": "30",
+            "Wins": "11",
+            "Draws": "8",
+            "Losses": "11",
+            "Goals": "41:36",
+            "GD": "5",
+            "Points": "41"
+        },
+        {
+            "Rank": "9.",
+            "Team": "Defence Force",
+            "MP": "30",
+            "Wins": "11",
+            "Draws": "7",
+            "Losses": "12",
+            "Goals": "39:36",
+            "GD": "3",
+            "Points": "40"
+        },
+        {
+            "Rank": "10.",
+            "Team": "Dire Dawa",
+            "MP": "30",
+            "Wins": "11",
+            "Draws": "7",
+            "Losses": "12",
+            "Goals": "42:47",
+            "GD": "-5",
+            "Points": "40"
+        },
+        {
+            "Rank": "11.",
+            "Team": "Sidama Bunna",
+            "MP": "30",
+            "Wins": "10",
+            "Draws": "8",
+            "Losses": "12",
+            "Goals": "34:42",
+            "GD": "-8",
+            "Points": "38"
+        },
+        {
+            "Rank": "12.",
+            "Team": "Welayta Dicha",
+            "MP": "30",
+            "Wins": "8",
+            "Draws": "13",
+            "Losses": "9",
+            "Goals": "25:27",
+            "GD": "-2",
+            "Points": "37"
+        },
+        {
+            "Rank": "13.",
+            "Team": "Wolkite Ketema",
+            "MP": "30",
+            "Wins": "8",
+            "Draws": "11",
+            "Losses": "11",
+            "Goals": "34:39",
+            "GD": "-5",
+            "Points": "35"
+        },
+        {
+            "Rank": "14.",
+            "Team": "Arba Menche",
+            "MP": "30",
+            "Wins": "6",
+            "Draws": "16",
+            "Losses": "8",
+            "Goals": "35:36",
+            "GD": "-1",
+            "Points": "34"
+        },
+        {
+            "Rank": "15.",
+            "Team": "Legetafo Legedadi",
+            "MP": "30",
+            "Wins": "4",
+            "Draws": "6",
+            "Losses": "20",
+            "Goals": "24:67",
+            "GD": "-43",
+            "Points": "18"
+        },
+        {
+            "Rank": "16.",
+            "Team": "Ethio Electric",
+            "MP": "30",
+            "Wins": "2",
+            "Draws": "9",
+            "Losses": "19",
+            "Goals": "27:51",
+            "GD": "-24",
+            "Points": "15"
+        }
+    ]
+}
