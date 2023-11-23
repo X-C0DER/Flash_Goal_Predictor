@@ -6,8 +6,8 @@ import re
 
 def get_data(url):
     print ("Getting Data for: "+ url)
-    match = re.search(r'/football/([^/]*)/', url)
-    league=match.group(1)
+    match = re.search(r'/football/([^/]*)/([^/]*)/', url)
+    league=match.group(1).capitalize() + '_' + match.group(2).capitalize()
 
     resp=requests.get(url)
 
@@ -34,17 +34,20 @@ def get_data(url):
         links.append("https://www.flashscore.com" + link)
         
         data.append({
+            'League':league,
             'season': season,
             'winner': winner_name
         })
 
     json_data = json.dumps(data)
 
-    with open(league+'.json', 'w') as f:
+    with open(league+'_winner.json', 'w') as f:
         json.dump(data, f)
     
     f.close()
-    with open(league+"archive_list.txt","w") as fp:    
+
+    links.pop(0)
+    with open(league+"_archive_list.txt","w") as fp:    
         for l in links:
             fp.write(l+"\n")
 
