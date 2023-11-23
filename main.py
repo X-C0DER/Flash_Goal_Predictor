@@ -61,16 +61,4 @@ def get_standing(url):
       json.dump(final_json, f)
 
 
-# Get a list of all text files that have '_archive_list.txt' in their names
-files = glob.glob('England_Premier-league_archive_list.txt')
-file="'England_archive_list.txt"
-
-with open(file, 'r') as f:
-    # Now you can read the file
-    
-    lines = f.readlines()
-    #print ("Checking "+lines)
-    get_standing(lines)
-    print("-------------------------------------------------")
-
-#get_standing("https://www.flashscore.com/football/ethiopia/premier-league-2022-2023/")
+get_standing("https://www.flashscore.com/football/england/premier-league-2014-2015/")
