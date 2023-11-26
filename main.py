@@ -141,6 +141,8 @@ def process_file(file):
             if line.strip():
                 print (line)
                 get_result(line)
+
+                #get_standing(line)
                 # with ThreadPoolExecutor() as executor:
                     # executor.submit(get_standing, line)
                     # executor.submit(get_result,line)
@@ -157,4 +159,4 @@ def get_lines(fname):
             if line.strip():  # Check if the line is not empty after stripping whitespace
                 line_count += 1
     return line_count
-  
+

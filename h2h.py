@@ -54,8 +54,8 @@ for result_file in result_files:
     match_details_dict = load_match_details(file_path)
 
     # Print debug information for each file
-    print(f"\nDebug information for {result_file}:")
-    print(match_details_dict)  # Print loaded match details for inspection
+    #print(f"\nDebug information for {result_file}:")
+    #print(match_details_dict)  # Print loaded match details for inspection
 
     # Get the list of teams
     teams = set()
