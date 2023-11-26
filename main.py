@@ -10,11 +10,13 @@ import re
 import glob
 import time
 
-options = Options()
-options.headless = True
-driver = webdriver.Chrome(options=options)
+
 
 def get_standing(url):
+    options = Options()
+    options.headless = True
+    driver = webdriver.Chrome(options=options)
+
 
     match = re.search(r'/football/([^/]*)/([^/]*)/', url)
 
@@ -63,9 +65,15 @@ def get_standing(url):
         json.dump(final_json, f)
   
 
-def get_result():
+def get_result(url):
+    match = re.search(r'/football/([^/]*)/([^/]*)/', url)
 
-    driver.get("https://www.flashscore.com/football/ethiopia/premier-league-2022-2023/results/")
+    League = match.group(1)
+    year = match.group(2)
+
+    driver = webdriver.Chrome()
+    driver.get(url+"results/")
+
     consent = driver.find_element(By.ID, "onetrust-accept-btn-handler")
     consent.click() 
 
@@ -84,11 +92,9 @@ def get_result():
             break
 
     # Wait for matches to load
-    matches = WebDriverWait(driver, 5).until(
+    matches = WebDriverWait(driver, 10).until(
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, "[title='Click for match detail!']"))
     )
-
-    match_details = []
 
     match_details_dict = {}
     for match in matches:
@@ -99,15 +105,15 @@ def get_result():
         match_info = match.text 
         round_info = round.text
         
-        # Add round and other details to match_details list
+        # Add round and other details to match_details_dict
         if round_info in match_details_dict:
             match_details_dict[round_info].append({
                 "Date": match_info.split("\n")[0],
                 "Home Team": match_info.split("\n")[1],
                 "Away Team": match_info.split("\n")[2],
                 "Home Score": match_info.split("\n")[3],
-                "Away Score": match_info.split("\n")[4],
-
+                "Away Score": match_info.split("\n")[4]
+                
             })
         else:
             match_details_dict[round_info] = [{
@@ -115,26 +121,29 @@ def get_result():
                 "Home Team": match_info.split("\n")[1],
                 "Away Team": match_info.split("\n")[2],
                 "Home Score": match_info.split("\n")[3],
-                "Away Score": match_info.split("\n")[4],
-
+                "Away Score": match_info.split("\n")[4]
+               
             }]
 
-        driver.quit()
+    driver.quit()
 
-        # Save the match_details_dict to a JSON file
-        with open('result.json', 'w') as f:
-            json.dump(match_details_dict, f, indent=2)
+    # Save the match_details_dict to a JSON file
+    with open(f'{League}_{year}_result.json', 'w') as f:
+        json.dump(match_details_dict, f, indent=2)
 
 def process_file(file):
-    print("Getting Standings for " + file)
+    print("Getting Data From " + file)
     print("------------------------------------------------")
     with open(file) as fp:
         content = fp.read()
         lines = content.split("\n")
         for line in lines:
             if line.strip():
-                with ThreadPoolExecutor() as executor:
-                  executor.submit(get_standing, line)  # Check if the line is not empty
+                print (line)
+                get_result(line)
+                # with ThreadPoolExecutor() as executor:
+                    # executor.submit(get_standing, line)
+                    # executor.submit(get_result,line)
                   
 
     print("------------------------------------------------")
@@ -149,7 +158,3 @@ def get_lines(fname):
                 line_count += 1
     return line_count
   
-# Using ThreadPoolExecutor for concurrent processing
-for f in glob.glob("*_archive_list.txt"):
-      print ("Getting data for "+f)
-      print(get_lines(f))
