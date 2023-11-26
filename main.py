@@ -2,20 +2,20 @@ from concurrent.futures import ThreadPoolExecutor
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait 
+from selenium.webdriver.support import expected_conditions as EC
 import json
 import pandas as pd
 import re
 import glob
-from selenium.webdriver.support.ui import WebDriverWait 
-from selenium.webdriver.support import expected_conditions as EC
 import time
 
-
+options = Options()
+options.headless = True
+driver = webdriver.Chrome(options=options)
 
 def get_standing(url):
-    options = Options()
-    options.headless = True
-    driver = webdriver.Chrome(options=options)
+
     match = re.search(r'/football/([^/]*)/([^/]*)/', url)
 
     League = match.group(1)
@@ -58,38 +58,13 @@ def get_standing(url):
         "league": League,
         "standings": json.loads(json_data)
     }
-
-    with open(League + '_' + year + '_' + 'standings.json', 'w') as f:
+    filename=f"{League}_{year}_standings.json"
+    with open(filename, 'w') as f:
         json.dump(final_json, f)
-
-
-def process_file(file):
-    print("Getting Standings for " + file)
-    print("------------------------------------------------")
-    with open(file) as fp:
-        content = fp.read()
-        lines = content.split("\n")
-        for line in lines:
-            if line.strip():
-                with ThreadPoolExecutor() as executor:
-                  executor.submit(get_standing, line)  # Check if the line is not empty
-                  
-
-    print("------------------------------------------------")
-
-def get_lines(fname):
-    line_count = 0
-    with open(fname) as fp:
-        content = fp.read()
-        lines = content.splitlines()
-        for line in lines:
-            if line.strip():  # Check if the line is not empty after stripping whitespace
-                line_count += 1
-    return line_count
-    
+  
 
 def get_result():
-    driver = webdriver.Chrome()
+
     driver.get("https://www.flashscore.com/football/ethiopia/premier-league-2022-2023/results/")
     consent = driver.find_element(By.ID, "onetrust-accept-btn-handler")
     consent.click() 
@@ -149,6 +124,31 @@ def get_result():
         # Save the match_details_dict to a JSON file
         with open('result.json', 'w') as f:
             json.dump(match_details_dict, f, indent=2)
+
+def process_file(file):
+    print("Getting Standings for " + file)
+    print("------------------------------------------------")
+    with open(file) as fp:
+        content = fp.read()
+        lines = content.split("\n")
+        for line in lines:
+            if line.strip():
+                with ThreadPoolExecutor() as executor:
+                  executor.submit(get_standing, line)  # Check if the line is not empty
+                  
+
+    print("------------------------------------------------")
+
+def get_lines(fname):
+    line_count = 0
+    with open(fname) as fp:
+        content = fp.read()
+        lines = content.splitlines()
+        for line in lines:
+            if line.strip():  # Check if the line is not empty after stripping whitespace
+                line_count += 1
+    return line_count
+  
 # Using ThreadPoolExecutor for concurrent processing
 for f in glob.glob("*_archive_list.txt"):
       print ("Getting data for "+f)
