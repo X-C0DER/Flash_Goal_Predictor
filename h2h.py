@@ -23,17 +23,20 @@ def head_to_head(teams, match_details, existing_data=None):
                     }
 
                 for matches in match_details.values():
-                    for match in matches:
-                        if match['Home Team'] == team1 and match['Away Team'] == team2:
-                            head_to_head_data[matchup]['Matches Played'] += 1
-                            if match['Home Score'] > match['Away Score']:
-                                head_to_head_data[matchup][f'{team1} Home Wins'] += 1
-                                head_to_head_data[matchup][f'{team2} Away Wins'] += 1
-                            elif match['Home Score'] < match['Away Score']:
-                                head_to_head_data[matchup][f'{team2} Home Wins'] += 1
-                                head_to_head_data[matchup][f'{team1} Away Wins'] += 1
-                            else:
-                                head_to_head_data[matchup]['Draws'] += 1
+                        
+                        if not matches:
+                            continue
+                        for match in matches:
+                            if match['Home Team'] == team1 and match['Away Team'] == team2:
+                                head_to_head_data[matchup]['Matches Played'] += 1
+                                if match['Home Score'] > match['Away Score']:
+                                    head_to_head_data[matchup][f'{team1} Home Wins'] += 1
+                                    head_to_head_data[matchup][f'{team2} Away Wins'] += 1
+                                elif match['Home Score'] < match['Away Score']:
+                                    head_to_head_data[matchup][f'{team2} Home Wins'] += 1
+                                    head_to_head_data[matchup][f'{team1} Away Wins'] += 1
+                                else:
+                                    head_to_head_data[matchup]['Draws'] += 1
 
     return head_to_head_data
 
@@ -62,9 +65,7 @@ for result_file in result_files:
     for matches in match_details_dict.values():
         for match in matches:
             teams.add(match['Home Team'])
-            teams.add(match['Away Team'])
-
-    # Update head-to-head analysis with the current result file's data
+            teams.add(match['Away Team']) 
     cumulative_head_to_head_data = head_to_head(teams, match_details_dict, cumulative_head_to_head_data)
 
 # Save cumulative head-to-head data to a file (h2h.json)
@@ -73,3 +74,6 @@ with open(output_file_path, 'w') as output_file:
     json.dump(cumulative_head_to_head_data, output_file, indent=4)
 
 print(f"\nCumulative Head-to-Head Analysis saved to h2h.json.")
+
+
+    # Update head-to-head analysis with the current

@@ -132,21 +132,16 @@ def get_result(url):
         json.dump(match_details_dict, f, indent=2)
 
 def process_file(file):
-    print("Getting Data From " + file)
+    
     print("------------------------------------------------")
     with open(file) as fp:
         content = fp.read()
         lines = content.split("\n")
         for line in lines:
+            print("Getting Data From " + line)
             if line.strip():
                 print (line)
                 get_result(line)
-
-                #get_standing(line)
-                # with ThreadPoolExecutor() as executor:
-                    # executor.submit(get_standing, line)
-                    # executor.submit(get_result,line)
-                  
 
     print("------------------------------------------------")
 
@@ -159,4 +154,5 @@ def get_lines(fname):
             if line.strip():  # Check if the line is not empty after stripping whitespace
                 line_count += 1
     return line_count
+
 
